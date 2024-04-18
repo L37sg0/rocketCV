@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Enums\Gender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,7 +35,10 @@ class Applicant extends Model
         self::FIELD_GENDER,
         self::FIELD_BIRTH_DATE,
     ];
-    public const CASTS = [];
+    public const CASTS = [
+        self::FIELD_GENDER => Gender::class,
+        self::FIELD_BIRTH_DATE => 'datetime:Y-m-d'
+    ];
 
     protected $table    = self::TABLE_NAME;
     protected $fillable = self::FILLABLE;

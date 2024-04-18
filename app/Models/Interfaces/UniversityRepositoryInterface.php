@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Models\Interfaces;
 
 use App\Models\University;
 use Illuminate\Database\Eloquent\Collection;

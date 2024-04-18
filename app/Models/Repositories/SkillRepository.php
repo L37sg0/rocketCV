@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Models\Repositories;
 
-use App\Interfaces\SkillRepositoryInterface;
+use App\Models\Interfaces\SkillRepositoryInterface;
 use App\Models\Skill as Model;
 use Illuminate\Database\Eloquent\Collection;
 

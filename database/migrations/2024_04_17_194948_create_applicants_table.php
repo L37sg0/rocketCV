@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Enums\Gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +15,13 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(Model::FIELD_FIRST_NAME);
-            $table->string(Model::FIELD_MID_NAME);
-            $table->string(Model::FIELD_LAST_NAME);
-            $table->string(Model::FIELD_EMAIL);
-            $table->string(Model::FIELD_PHONE);
-            $table->string(Model::FIELD_GENDER);
-            $table->string(Model::FIELD_BIRTH_DATE);
+            $table->string(Model::FIELD_FIRST_NAME, 50);
+            $table->string(Model::FIELD_MID_NAME, 50);
+            $table->string(Model::FIELD_LAST_NAME, 50);
+            $table->string(Model::FIELD_EMAIL, 50)->unique();
+            $table->string(Model::FIELD_PHONE, 15)->unique();
+            $table->tinyInteger(Model::FIELD_GENDER)->default(Gender::Other);
+            $table->timestamp(Model::FIELD_BIRTH_DATE);
             $table->timestamps();
         });
     }

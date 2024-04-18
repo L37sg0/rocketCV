@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(Model::FIELD_NAME);
+            $table->string(Model::FIELD_NAME, 100);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Enums\Degree;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,7 +34,11 @@ class Education extends Model
         self::FIELD_SPECIALTY,
         self::FIELD_ACCREDITATION_ASSESSMENT,
     ];
-    public const CASTS = [];
+    public const CASTS = [
+        self::FIELD_DEGREE => Degree::class,
+        self::FIELD_DATE_FROM => 'datetime:Y-m-d',
+        self::FIELD_DATE_TO => 'datetime:Y-m-d'
+    ];
 
     protected $table = self::TABLE_NAME;
     protected $fillable = self::FILLABLE;

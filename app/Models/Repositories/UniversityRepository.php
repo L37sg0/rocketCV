@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Models\Repositories;
 
-use App\Interfaces\ApplicantRepositoryInterface;
-use App\Models\Applicant as Model;
+use App\Models\Interfaces\UniversityRepositoryInterface;
+use App\Models\University as Model;
 use Illuminate\Database\Eloquent\Collection;
 
-class ApplicantRepository implements ApplicantRepositoryInterface
+class UniversityRepository implements UniversityRepositoryInterface
 {
 
     public function getAll(): Collection

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Models\Repositories;
 
-use App\Interfaces\EducationRepositoryInterface;
 use App\Models\Education as Model;
+use App\Models\Interfaces\EducationRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class EducationRepository implements EducationRepositoryInterface
