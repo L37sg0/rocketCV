@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Skill extends Model
 {
@@ -26,8 +27,11 @@ class Skill extends Model
     protected $fillable = self::FILLABLE;
     protected $casts = self::CASTS;
 
+    /**
+     * @return BelongsToMany
+     */
     public function applicants()
     {
-        return $this->belongsToMany(Applicant::class);
+        return $this->belongsToMany(Applicant::class, ApplicantSkill::TABLE_NAME);
     }
 }

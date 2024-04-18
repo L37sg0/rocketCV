@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->foreignId(Model::FIELD_APPLICANT_ID)
                 ->index()
-                ->constrained(Applicant::TABLE_NAME)
+                ->constrained(Applicant::TABLE_NAME, Applicant::FIELD_ID)
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId(Model::FIELD_APPLICANT_ID)
+            $table->foreignId(Model::FIELD_SKILL_ID)
                 ->index()
-                ->constrained(Skill::TABLE_NAME)
+                ->constrained(Skill::TABLE_NAME, Skill::FIELD_ID)
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

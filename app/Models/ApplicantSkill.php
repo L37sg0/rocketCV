@@ -10,7 +10,12 @@ class ApplicantSkill extends Model
 
     public const FIELD_APPLICANT_ID = 'applicant_id';
     public const FIELD_SKILL_ID = 'skill_id';
+    public const FILLABLE = [
+        self::FIELD_APPLICANT_ID,
+        self::FIELD_SKILL_ID
+    ];
 
     protected $table = self::TABLE_NAME;
-    public $timestamps = false;
+    protected $fillable = self::FILLABLE;
+//    public $timestamps = false;
 }

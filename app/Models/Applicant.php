@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Enums\Gender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Applicant extends Model
 {
@@ -49,8 +50,11 @@ class Applicant extends Model
         return $this->hasMany(Education::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function skills()
     {
-        return $this->hasMany(Skill::class);
+        return $this->belongsToMany(Skill::class, ApplicantSkill::TABLE_NAME);
     }
 }

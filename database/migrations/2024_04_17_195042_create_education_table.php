@@ -23,7 +23,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->foreignId(Model::FIELD_UNV_ID)
                 ->index()
-                ->constrained(University::TABLE_NAME)
+                ->constrained(University::TABLE_NAME, University::FIELD_ID)
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamp(Model::FIELD_DATE_FROM)->nullable();
