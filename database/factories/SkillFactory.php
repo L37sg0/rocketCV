@@ -18,7 +18,7 @@ class SkillFactory extends Factory
     public function definition(): array
     {
         return [
-            Model::FIELD_NAME => $this->faker->name(),
+            Model::FIELD_NAME => $this->faker->unique()->jobTitle,
         ];
     }
 }

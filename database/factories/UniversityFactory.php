@@ -17,7 +17,7 @@ class UniversityFactory extends Factory
     public function definition(): array
     {
         return [
-            Model::FIELD_NAME => $this->faker->name
+            Model::FIELD_NAME => $this->faker->unique()->name . $this->faker->unique()->jobTitle . 'School'
         ];
     }
 }

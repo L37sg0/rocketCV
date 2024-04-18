@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(Model::FIELD_NAME, 50)->index();
+            $table->string(Model::FIELD_NAME, 50)->index()->unique();
             $table->timestamps();
         });
     }
