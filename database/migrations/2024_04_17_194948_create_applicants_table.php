@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string(Model::FIELD_FIRST_NAME, 50);
             $table->string(Model::FIELD_MID_NAME, 50);
             $table->string(Model::FIELD_LAST_NAME, 50);
-            $table->string(Model::FIELD_EMAIL, 50)->unique();
-            $table->string(Model::FIELD_PHONE, 15)->unique();
+            $table->string(Model::FIELD_EMAIL, 50)->index()->unique();
+            $table->string(Model::FIELD_PHONE, 15)->index()->unique();
             $table->tinyInteger(Model::FIELD_GENDER)->default(Gender::Other);
-            $table->timestamp(Model::FIELD_BIRTH_DATE);
+            $table->timestamp(Model::FIELD_BIRTH_DATE)->index();
             $table->timestamps();
         });
     }
