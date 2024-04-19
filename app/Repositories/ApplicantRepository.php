@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Repositories;
 
-use App\Models\Interfaces\SkillRepositoryInterface;
-use App\Models\Skill as Model;
+use App\Models\Applicant as Model;
 use Illuminate\Database\Eloquent\Collection;
 
-class SkillRepository implements SkillRepositoryInterface
+class ApplicantRepository implements ApplicantRepositoryInterface
 {
 
     public function getAll(): Collection
