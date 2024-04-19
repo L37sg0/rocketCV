@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class University extends Model
 {
@@ -25,8 +26,16 @@ class University extends Model
     protected $fillable = self::FILLABLE;
     protected $casts = self::CASTS;
 
+    /**
+     * @return BelongsToMany
+     */
     public function applicants()
     {
-        return $this->hasMany(Applicant::class);
+        return $this->belongsToMany(
+            Applicant::class,
+            Education::TABLE_NAME,
+            Education::FIELD_APPLICANT_ID,
+            Education::FIELD_UNV_ID
+        );
     }
 }

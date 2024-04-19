@@ -57,4 +57,17 @@ class Applicant extends Model
     {
         return $this->belongsToMany(Skill::class, ApplicantSkill::TABLE_NAME);
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function universities()
+    {
+        return $this->belongsToMany(
+            University::class,
+            Education::TABLE_NAME,
+            Education::FIELD_UNV_ID,
+            Education::FIELD_APPLICANT_ID
+        );
+    }
 }

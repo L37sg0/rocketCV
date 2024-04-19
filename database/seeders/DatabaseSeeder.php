@@ -6,8 +6,6 @@ use App\Models\Applicant;
 use App\Models\Education;
 use App\Models\Skill;
 use App\Models\University;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,12 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
         Applicant::factory(100)->create();
         University::factory(100)->create();
         Skill::factory(100)->create();
