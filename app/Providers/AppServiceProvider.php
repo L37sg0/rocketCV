@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Exceptions\ApiExceptionHandler;
+use App\Http\Kernel;
 use App\Models\Applicant;
 use App\Models\ApplicantInterface;
 use App\Models\Education;
@@ -18,20 +20,23 @@ use App\Repositories\SkillRepository;
 use App\Repositories\SkillRepositoryInterface;
 use App\Repositories\UniversityRepository;
 use App\Repositories\UniversityRepositoryInterface;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     public $bindings = [
-        ApplicantInterface::class => Applicant::class,
-        EducationInterface::class => Education::class,
-        SkillInterface::class => Skill::class,
-        UniversityInterface::class => University::class,
+        ApplicantInterface::class               => Applicant::class,
+        EducationInterface::class               => Education::class,
+        SkillInterface::class                   => Skill::class,
+        UniversityInterface::class              => University::class,
 
-        ApplicantRepositoryInterface::class => ApplicantRepository::class,
-        EducationRepositoryInterface::class => EducationRepository::class,
-        SkillRepositoryInterface::class => SkillRepository::class,
-        UniversityRepositoryInterface::class => UniversityRepository::class,
+        ApplicantRepositoryInterface::class     => ApplicantRepository::class,
+        EducationRepositoryInterface::class     => EducationRepository::class,
+        SkillRepositoryInterface::class         => SkillRepository::class,
+        UniversityRepositoryInterface::class    => UniversityRepository::class,
+
+        ExceptionHandler::class                 => ApiExceptionHandler::class,
     ];
 
     /**
@@ -39,9 +44,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-//        foreach ($this->bindings as $abstract => $concrete) {
-//            $this->app->bind($abstract, $concrete);
-//        }
+        //
     }
 
     /**
