@@ -2,9 +2,10 @@
 
 namespace App\DataTransferObjects;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 
-class ApplicantDTO
+class ApplicantDTO implements Arrayable
 {
     private const FIELD_FIRST_NAME  = 'first_name';
     private const FIELD_MID_NAME    = 'mid_name';
@@ -31,6 +32,19 @@ class ApplicantDTO
         $this->phone = $data[self::FIELD_PHONE];
         $this->gender = $data[self::FIELD_GENDER];
         $this->birthDate = $data[self::FIELD_BIRTH_DATE];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            self::FIELD_FIRST_NAME  => $this->getFirstName(),
+            self::FIELD_MID_NAME    => $this->getMiddleName(),
+            self::FIELD_LAST_NAME   => $this->getLastName(),
+            self::FIELD_EMAIL       => $this->getEmail(),
+            self::FIELD_PHONE       => $this->getPhone(),
+            self::FIELD_GENDER      => $this->getGender(),
+            self::FIELD_BIRTH_DATE  => $this->getBirthDate(),
+        ];
     }
 
     public static function fromRequest(Request $request): static

@@ -2,9 +2,10 @@
 
 namespace App\DataTransferObjects;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 
-class EducationDTO
+class EducationDTO implements Arrayable
 {
     private const FIELD_APPLICANT_ID = "applicant_id";
     private const FIELD_UNV_ID = 'unv_id';
@@ -31,6 +32,19 @@ class EducationDTO
         $this->degree                   = $data[self::FIELD_DEGREE];
         $this->specialty                = $data[self::FIELD_SPECIALTY];
         $this->accreditationAssessment  = $data[self::FIELD_ACCREDITATION_ASSESSMENT];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            self::FIELD_APPLICANT_ID                => $this->applicantId,
+            self::FIELD_UNV_ID                      => $this->universityId,
+            self::FIELD_DATE_FROM                   => $this->dateFrom,
+            self::FIELD_DATE_TO                     => $this->dateTo,
+            self::FIELD_DEGREE                      => $this->degree,
+            self::FIELD_SPECIALTY                   => $this->specialty,
+            self::FIELD_ACCREDITATION_ASSESSMENT    => $this->accreditationAssessment,
+        ];
     }
 
     public static function fromRequest(Request $request): static
