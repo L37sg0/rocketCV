@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 abstract class AbstractUniversityRequest extends FormRequest
 {

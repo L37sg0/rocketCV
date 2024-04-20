@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Enums\Degree;
-use App\Models\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 

@@ -15,15 +15,7 @@ class UpdateApplicantRequest extends AbstractApplicantRequest
 
     public function rules(): array
     {
-        return [
-            self::FIELD_ID          => [],
-            self::FIELD_FIRST_NAME  => [],
-            self::FIELD_MID_NAME    => [],
-            self::FIELD_LAST_NAME   => [],
-            self::FIELD_EMAIL       => [],
-            self::FIELD_PHONE       => [],
-            self::FIELD_GENDER      => [],
-            self::FIELD_BIRTH_DATE  => [],
-        ];
+        $rules = $this->getRules();
+        return $rules;
     }
 }
