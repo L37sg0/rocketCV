@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\University;
+use App\Models\UniversityInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 interface UniversityRepositoryInterface
 {
     public function getAll(): Collection;
 
-    public function getById(int $id): ?University;
+    public function getById(int $id): ?UniversityInterface;
 
-    public function create(array $data): ?University;
+    public function create(array $data): ?UniversityInterface;
 
-    public function update(int $id, array $data): ?University;
+    public function update(UniversityInterface $university): ?UniversityInterface;
 
-    public function delete(int $id): bool;
+    public function delete(UniversityInterface $university): bool;
 }

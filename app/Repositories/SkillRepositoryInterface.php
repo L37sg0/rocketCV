@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Skill;
+use App\Models\SkillInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 interface SkillRepositoryInterface
 {
     public function getAll(): Collection;
 
-    public function getById(int $id): ?Skill;
+    public function getById(int $id): ?SkillInterface;
 
-    public function create(array $data): ?Skill;
+    public function create(array $data): ?SkillInterface;
 
-    public function update(int $id, array $data): ?Skill;
+    public function update(SkillInterface $skill): ?SkillInterface;
 
-    public function delete(int $id): bool;
+    public function delete(SkillInterface $skill): bool;
 }

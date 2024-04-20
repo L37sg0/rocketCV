@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\University as Model;
+use App\Models\UniversityInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class UniversityRepository implements UniversityRepositoryInterface
@@ -13,23 +14,26 @@ class UniversityRepository implements UniversityRepositoryInterface
         return Model::all();
     }
 
-    public function getById(int $id): ?Model
+    public function getById(int $id): ?UniversityInterface
     {
         return Model::findOrFail($id);
     }
 
-    public function create(array $data): ?Model
+    public function create(array $data): ?UniversityInterface
     {
         return Model::create($data);
     }
 
-    public function update(int $id, array $data): ?Model
+    public function update(UniversityInterface $university): ?UniversityInterface
     {
+        $id = $university->getId();
+        $data = [];
         return Model::whereId($id)->update($data);
     }
 
-    public function delete(int $id): bool
+    public function delete(UniversityInterface $university): bool
     {
+        $id = $university->getId();
         return Model::destroy($id);
     }
 }
