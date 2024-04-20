@@ -2,12 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
-class StoreApplicantRequest extends FormRequest
+class StoreApplicantRequest extends AbstractApplicantRequest
 {
+
+
     /**
-     * Determine if the user is authorized to make this request.
+     * @return bool
      */
     public function authorize(): bool
     {
@@ -15,14 +19,12 @@ class StoreApplicantRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array|\Illuminate\Contracts\Validation\ValidationRule[]|\mixed[][]|string[]
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $rules = $this->getRules();
+        unset($rules[self::FIELD_ID]);
+        return $rules;
     }
 }

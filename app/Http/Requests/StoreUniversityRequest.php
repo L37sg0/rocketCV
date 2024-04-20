@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUniversityRequest extends FormRequest
+class StoreUniversityRequest extends AbstractUniversityRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,8 +21,8 @@ class StoreUniversityRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $rules = $this->getRules();
+        unset($rules[self::FIELD_ID]);
+        return $rules;
     }
 }

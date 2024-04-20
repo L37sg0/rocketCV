@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateApplicantRequest extends FormRequest
+class UpdateApplicantRequest extends AbstractApplicantRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,15 +12,18 @@ class UpdateApplicantRequest extends FormRequest
         return false;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
         return [
-            //
+            self::FIELD_ID          => [],
+            self::FIELD_FIRST_NAME  => [],
+            self::FIELD_MID_NAME    => [],
+            self::FIELD_LAST_NAME   => [],
+            self::FIELD_EMAIL       => [],
+            self::FIELD_PHONE       => [],
+            self::FIELD_GENDER      => [],
+            self::FIELD_BIRTH_DATE  => [],
         ];
     }
 }
