@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Repositories;
 
-use App\Models\Interfaces\UniversityRepositoryInterface;
-use App\Models\University as Model;
+use App\Models\Skill as Model;
+use App\Models\SkillInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-class UniversityRepository implements UniversityRepositoryInterface
+class SkillRepository implements SkillRepositoryInterface
 {
 
     public function getAll(): Collection
@@ -14,17 +14,17 @@ class UniversityRepository implements UniversityRepositoryInterface
         return Model::all();
     }
 
-    public function getById(int $id): ?Model
+    public function getById(int $id): ?SkillInterface
     {
         return Model::findOrFail($id);
     }
 
-    public function create(array $data): ?Model
+    public function create(array $data): ?SkillInterface
     {
         return Model::create($data);
     }
 
-    public function update(int $id, array $data): ?Model
+    public function update(int $id, array $data): ?SkillInterface
     {
         return Model::whereId($id)->update($data);
     }

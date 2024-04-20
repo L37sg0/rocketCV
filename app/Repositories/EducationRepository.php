@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Repositories;
 
 use App\Models\Education as Model;
-use App\Models\Interfaces\EducationRepositoryInterface;
+use App\Models\EducationInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class EducationRepository implements EducationRepositoryInterface
@@ -14,17 +14,17 @@ class EducationRepository implements EducationRepositoryInterface
         return Model::all();
     }
 
-    public function getById(int $id): ?Model
+    public function getById(int $id): ?EducationInterface
     {
         return Model::findOrFail($id);
     }
 
-    public function create(array $data): ?Model
+    public function create(array $data): ?EducationInterface
     {
         return Model::create($data);
     }
 
-    public function update(int $id, array $data): ?Model
+    public function update(int $id, array $data): ?EducationInterface
     {
         return Model::whereId($id)->update($data);
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Repositories;
 
-use App\Models\Applicant as Model;
-use App\Models\Interfaces\ApplicantRepositoryInterface;
+use App\Models\University as Model;
+use App\Models\UniversityInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-class ApplicantRepository implements ApplicantRepositoryInterface
+class UniversityRepository implements UniversityRepositoryInterface
 {
 
     public function getAll(): Collection
@@ -14,17 +14,17 @@ class ApplicantRepository implements ApplicantRepositoryInterface
         return Model::all();
     }
 
-    public function getById(int $id): ?Model
+    public function getById(int $id): ?UniversityInterface
     {
         return Model::findOrFail($id);
     }
 
-    public function create(array $data): ?Model
+    public function create(array $data): ?UniversityInterface
     {
         return Model::create($data);
     }
 
-    public function update(int $id, array $data): ?Model
+    public function update(int $id, array $data): ?UniversityInterface
     {
         return Model::whereId($id)->update($data);
     }
