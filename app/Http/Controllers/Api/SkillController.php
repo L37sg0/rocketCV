@@ -33,7 +33,10 @@ class SkillController extends Controller
     public function store(StoreSkillRequest $request)
     {
         $data = SkillDTO::fromRequest($request)->toArray();
-        $this->skillRepository->create($data);
+        if (!empty($this->skillRepository->create($data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_CREATE, 400);
     }
 
     /**
@@ -52,7 +55,10 @@ class SkillController extends Controller
     {
         $data = SkillDTO::fromRequest($request)->toArray();
         $id = $request->get('id');
-        $this->skillRepository->update($id, $data);
+        if (!empty($this->skillRepository->update($id, $data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_UPDATE, 400);
     }
 
     /**
@@ -60,6 +66,9 @@ class SkillController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->skillRepository->delete($id);
+        if ($this->skillRepository->delete($id)) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_DELETE, 400);
     }
 }

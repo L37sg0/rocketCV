@@ -33,7 +33,10 @@ class EducationController extends Controller
     public function store(StoreEducationRequest $request)
     {
         $data = EducationDTO::fromRequest($request)->toArray();
-        $this->educationRepository->create($data);
+        if (!empty($this->educationRepository->create($data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_CREATE, 400);
     }
 
     /**
@@ -52,7 +55,10 @@ class EducationController extends Controller
     {
         $data = EducationDTO::fromRequest($request)->toArray();
         $id = $request->get('id');
-        $this->educationRepository->update($id, $data);
+        if (!empty($this->educationRepository->update($id, $data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_UPDATE, 400);
     }
 
     /**
@@ -60,6 +66,9 @@ class EducationController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->educationRepository->delete($id);
+        if ($this->educationRepository->delete($id)) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_DELETE, 400);
     }
 }

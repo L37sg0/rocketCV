@@ -32,7 +32,10 @@ class ApplicantController extends Controller
     public function store(StoreApplicantRequest $request)
     {
         $data = ApplicantDTO::fromRequest($request)->toArray();
-        $this->applicantRepository->create($data);
+        if (!empty($this->applicantRepository->create($data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_CREATE, 400);
     }
 
     /**
@@ -51,7 +54,11 @@ class ApplicantController extends Controller
     {
         $data = ApplicantDTO::fromRequest($request)->toArray();
         $id = $request->get('id');
-        $this->applicantRepository->update($id, $data);
+
+        if (!empty($this->applicantRepository->update($id, $data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_UPDATE, 400);
     }
 
     /**
@@ -59,6 +66,9 @@ class ApplicantController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->applicantRepository->delete($id);
+        if ($this->applicantRepository->delete($id)) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_DELETE, 400);
     }
 }

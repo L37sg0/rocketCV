@@ -33,7 +33,10 @@ class UniversityController extends Controller
     public function store(StoreUniversityRequest $request)
     {
         $data = UniversityDTO::fromRequest($request)->toArray();
-        $this->universityRepository->create($data);
+        if (!empty($this->universityRepository->create($data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_CREATE, 400);
     }
 
     /**
@@ -52,7 +55,10 @@ class UniversityController extends Controller
     {
         $data = UniversityDTO::fromRequest($request)->toArray();
         $id = $request->get('id');
-        $this->universityRepository->update($id, $data);
+        if (!empty($this->universityRepository->update($id, $data))) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_UPDATE, 400);
     }
 
     /**
@@ -60,6 +66,9 @@ class UniversityController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->universityRepository->delete($id);
+        if ($this->universityRepository->delete($id)) {
+            return $this->jsonResponse(self::MESSAGE_SUCCESS);
+        }
+        return $this->jsonResponse(self::MESSAGE_COULD_NOT_DELETE, 400);
     }
 }
