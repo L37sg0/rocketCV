@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DataTransferObjects\SkillDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSkillRequest;
 use App\Http\Requests\UpdateSkillRequest;
+use App\Http\Resources\Skill\SkillResource;
+use App\Http\Resources\Skill\SkillResourceCollection;
 use App\Models\Skill;
+use App\Repositories\SkillRepositoryInterface;
 
 class SkillController extends Controller
 {
+    public function __construct(
+        private readonly SkillRepositoryInterface $skillRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $skills = $this->skillRepository->getAll();
+        return new SkillResourceCollection($skills);
     }
 
     /**
@@ -30,38 +32,34 @@ class SkillController extends Controller
      */
     public function store(StoreSkillRequest $request)
     {
-        //
+        $data = SkillDTO::fromRequest($request)->toArray();
+        $this->skillRepository->create($data);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Skill $skill)
+    public function show(int $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Skill $skill)
-    {
-        //
+        $skill = $this->skillRepository->getById($id);
+        return new SkillResource($skill);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSkillRequest $request, Skill $skill)
+    public function update(UpdateSkillRequest $request)
     {
-        //
+        $data = SkillDTO::fromRequest($request)->toArray();
+        $id = $request->get('id');
+        $this->skillRepository->update($id, $data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Skill $skill)
+    public function destroy(int $id)
     {
-        //
+        $this->skillRepository->delete($id);
     }
 }

@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DataTransferObjects\EducationDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEducationRequest;
 use App\Http\Requests\UpdateEducationRequest;
+use App\Http\Resources\Education\EducationResource;
+use App\Http\Resources\Education\EducationResourceCollection;
 use App\Models\Education;
+use App\Repositories\EducationRepositoryInterface;
 
 class EducationController extends Controller
 {
+    public function __construct(
+        private readonly EducationRepositoryInterface $educationRepository
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $educations = $this->educationRepository->getAll();
+        return new EducationResourceCollection($educations);
     }
 
     /**
@@ -30,38 +32,34 @@ class EducationController extends Controller
      */
     public function store(StoreEducationRequest $request)
     {
-        //
+        $data = EducationDTO::fromRequest($request)->toArray();
+        $this->educationRepository->create($data);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Education $education)
+    public function show(int $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Education $education)
-    {
-        //
+        $education = $this->educationRepository->getById($id);
+        return new EducationResource($education);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEducationRequest $request, Education $education)
+    public function update(UpdateEducationRequest $request)
     {
-        //
+        $data = EducationDTO::fromRequest($request)->toArray();
+        $id = $request->get('id');
+        $this->educationRepository->update($id, $data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Education $education)
+    public function destroy(int $id)
     {
-        //
+        $this->educationRepository->delete($id);
     }
 }

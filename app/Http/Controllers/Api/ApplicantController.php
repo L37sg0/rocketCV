@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DataTransferObjects\ApplicantDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicantRequest;
 use App\Http\Requests\UpdateApplicantRequest;
-use App\Http\Resources\Applicant\ApplicantCollection;
+use App\Http\Resources\Applicant\ApplicantResourceCollection;
 use App\Http\Resources\Applicant\ApplicantResource;
-use App\Models\Applicant;
 use App\Repositories\ApplicantRepositoryInterface;
 
 class ApplicantController extends Controller
@@ -23,15 +23,7 @@ class ApplicantController extends Controller
     public function index()
     {
         $applicants = $this->applicantRepository->getAll();
-        return new ApplicantCollection($applicants);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return new ApplicantResourceCollection($applicants);
     }
 
     /**
@@ -39,7 +31,8 @@ class ApplicantController extends Controller
      */
     public function store(StoreApplicantRequest $request)
     {
-        //
+        $data = ApplicantDTO::fromRequest($request)->toArray();
+        $this->applicantRepository->create($data);
     }
 
     /**
@@ -52,19 +45,13 @@ class ApplicantController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Applicant $applicant)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateApplicantRequest $request, Applicant $applicant)
+    public function update(UpdateApplicantRequest $request)
     {
-        $this->applicantRepository->update($request, $applicant);
+        $data = ApplicantDTO::fromRequest($request)->toArray();
+        $id = $request->get('id');
+        $this->applicantRepository->update($id, $data);
     }
 
     /**
