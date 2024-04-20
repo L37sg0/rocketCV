@@ -24,16 +24,13 @@ class UniversityRepository implements UniversityRepositoryInterface
         return Model::create($data);
     }
 
-    public function update(UniversityInterface $university): ?UniversityInterface
+    public function update(int $id, array $data): ?UniversityInterface
     {
-        $id = $university->getId();
-        $data = [];
         return Model::whereId($id)->update($data);
     }
 
-    public function delete(UniversityInterface $university): bool
+    public function delete(int $id): bool
     {
-        $id = $university->getId();
         return Model::destroy($id);
     }
 }

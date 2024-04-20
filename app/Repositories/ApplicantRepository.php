@@ -24,26 +24,13 @@ class ApplicantRepository implements ApplicantRepositoryInterface
         return Model::create($data);
     }
 
-    public function update(ApplicantInterface $applicant): ?ApplicantInterface
+    public function update(int $id, array $data): ?ApplicantInterface
     {
-        $id = $applicant->getId();
-        $data = [
-            Model::FIELD_FIRST_NAME => $applicant->getFirstName(),
-            Model::FIELD_MID_NAME   => $applicant->getMidName(),
-            Model::FIELD_LAST_NAME  => $applicant->getLastName(),
-            Model::FIELD_EMAIL      => $applicant->getEmail(),
-            Model::FIELD_PHONE      => $applicant->getEmail(),
-            Model::FIELD_GENDER     => $applicant->getGender(),
-            Model::FIELD_BIRTH_DATE => $applicant->getBirthDate(),
-        ];
-        /** @var ApplicantInterface $applicant */
-        $applicant = Model::whereId($id)->update($data);
-        return $applicant;
+        return Model::whereId($id)->update($data);
     }
 
-    public function delete(ApplicantInterface $applicant): bool
+    public function delete(int $id): bool
     {
-        $id = $applicant->getId();
         return Model::destroy($id);
     }
 }

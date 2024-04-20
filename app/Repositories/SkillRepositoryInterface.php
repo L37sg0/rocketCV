@@ -13,7 +13,7 @@ interface SkillRepositoryInterface
 
     public function create(array $data): ?SkillInterface;
 
-    public function update(SkillInterface $skill): ?SkillInterface;
+    public function update(int $id, array $data): ?SkillInterface;
 
-    public function delete(SkillInterface $skill): bool;
+    public function delete(int $id): bool;
 }

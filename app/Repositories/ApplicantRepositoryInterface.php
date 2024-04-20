@@ -13,7 +13,7 @@ interface ApplicantRepositoryInterface
 
     public function create(array $data): ?ApplicantInterface;
 
-    public function update(ApplicantInterface $applicant): ?ApplicantInterface;
+    public function update(int $id, array $data): ?ApplicantInterface;
 
-    public function delete(ApplicantInterface $applicant): bool;
+    public function delete(int $id): bool;
 }

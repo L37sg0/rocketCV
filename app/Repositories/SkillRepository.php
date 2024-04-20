@@ -24,18 +24,13 @@ class SkillRepository implements SkillRepositoryInterface
         return Model::create($data);
     }
 
-    public function update(SkillInterface $skill): ?SkillInterface
+    public function update(int $id, array $data): ?SkillInterface
     {
-        $id = $skill->getId();
-        $data = [
-            Model::FIELD_NAME => $skill->getName()
-        ];
         return Model::whereId($id)->update($data);
     }
 
-    public function delete(SkillInterface $skill): bool
+    public function delete(int $id): bool
     {
-        $id = $skill->getId();
         return Model::destroy($id);
     }
 }

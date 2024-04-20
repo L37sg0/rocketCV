@@ -13,7 +13,7 @@ interface UniversityRepositoryInterface
 
     public function create(array $data): ?UniversityInterface;
 
-    public function update(UniversityInterface $university): ?UniversityInterface;
+    public function update(int $id, array $data): ?UniversityInterface;
 
-    public function delete(UniversityInterface $university): bool;
+    public function delete(int $id): bool;
 }

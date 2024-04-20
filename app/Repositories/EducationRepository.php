@@ -24,24 +24,13 @@ class EducationRepository implements EducationRepositoryInterface
         return Model::create($data);
     }
 
-    public function update(EducationInterface $education): ?EducationInterface
+    public function update(int $id, array $data): ?EducationInterface
     {
-        $id = $education->getId();
-        $data = [
-            Model::FIELD_APPLICANT_ID               => $education->getApplicantId(),
-            Model::FIELD_UNV_ID                     => $education->getUniversityId(),
-            Model::FIELD_DATE_FROM                  => $education->getDateFrom(),
-            Model::FIELD_DATE_TO                    => $education->getDateTo(),
-            Model::FIELD_DEGREE                     => $education->getDegree(),
-            Model::FIELD_SPECIALTY                  => $education->getSpecialty(),
-            Model::FIELD_ACCREDITATION_ASSESSMENT   => $education->getAccreditationAssessment(),
-        ];
         return Model::whereId($id)->update($data);
     }
 
-    public function delete(EducationInterface $education): bool
+    public function delete(int $id): bool
     {
-        $id = $education->getId();
         return Model::destroy($id);
     }
 }

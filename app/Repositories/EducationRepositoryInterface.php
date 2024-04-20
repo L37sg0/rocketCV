@@ -13,7 +13,7 @@ interface EducationRepositoryInterface
 
     public function create(array $data): ?EducationInterface;
 
-    public function update(EducationInterface $education): ?EducationInterface;
+    public function update(int $id, array $data): ?EducationInterface;
 
-    public function delete(EducationInterface $education): bool;
+    public function delete(int $id): bool;
 }
