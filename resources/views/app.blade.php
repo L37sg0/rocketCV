@@ -898,7 +898,7 @@
                     </nav>
                 @endif
             </header>
-
+            @include('components.navbar')
             @yield('content')
 
             <footer class="py-16 text-center text-sm text-black dark:text-white/70">
@@ -923,6 +923,13 @@
             preflight: false,
         },
     };
+    // // Initialization for ES Users
+    // import {
+    //     Collapse,
+    //     initTWE,
+    // } from "tw-elements";
+    //
+    // initTWE({Collapse});
 </script>
 @yield('scripts')
 </body>
