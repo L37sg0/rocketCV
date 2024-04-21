@@ -29,7 +29,7 @@ class EducationFactory extends Factory
             Model::FIELD_DATE_FROM                  => $this->faker->dateTimeBetween('-18 years', '-2 years'),
             Model::FIELD_DATE_TO                    => $this->faker->dateTimeBetween('-2 years', '+2 years'),
             Model::FIELD_DEGREE                     => $degree,
-            Model::FIELD_SPECIALTY                  => $this->faker->sentence(3),
+            Model::FIELD_SPECIALTY                  => $this->faker->unique()->jobTitle,
             Model::FIELD_ACCREDITATION_ASSESSMENT   => $this->faker->randomFloat(2,3,6),
         ];
     }
