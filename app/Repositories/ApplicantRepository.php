@@ -14,6 +14,11 @@ class ApplicantRepository implements ApplicantRepositoryInterface
         return Model::all();
     }
 
+    public function getAllPaginated(int $limit)
+    {
+        return Model::paginate($limit);
+    }
+
     public function getById(int $id): ?ApplicantInterface
     {
         return Model::findOrFail($id);

@@ -22,7 +22,7 @@ class ApplicantController extends Controller
      */
     public function index()
     {
-        $applicants = $this->applicantRepository->getAll();
+        $applicants = $this->applicantRepository->getAllPaginated(5);
         return new ApplicantResourceCollection($applicants);
     }
 
