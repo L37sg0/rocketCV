@@ -44,7 +44,7 @@ class ApplicantController extends Controller
     public function show(int $id)
     {
         $applicant = $this->applicantRepository->getById($id);
-        return new ApplicantResource($applicant);
+        return new ApplicantResource($applicant->load(['skills', 'educations']));
     }
 
     /**
