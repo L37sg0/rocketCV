@@ -11,7 +11,7 @@
 
         <div class="row skills-content">
 
-            <div class="col-lg-6" data-aos="fade-up">
+            <div class="col-lg-6 about-skills" data-aos="fade-up">
 
                 <div class="progress">
                     <span class="skill">HTML <i class="val">100%</i></span>
@@ -39,7 +39,7 @@
 
             </div>
 
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+<!--            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="progress">
                     <span class="skill">PHP <i class="val">80%</i></span>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>-->
 
         </div>
 

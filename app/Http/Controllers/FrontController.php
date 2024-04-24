@@ -6,14 +6,25 @@ use App\Helper\Config;
 
 class FrontController extends Controller
 {
-    private string $websiteName;
-    private string $websiteTitle;
 
     public function __construct(
         private readonly Config $config,
     ) {
-        $this->websiteName = $this->config->getWebsiteName();
-        $this->websiteTitle = $this->config->getWebsiteTitle();
+    }
+
+    private function getCompactData()
+    {
+        $websiteName = $this->config->getWebsiteName();
+        $websiteTitle = $this->config->getWebsiteTitle();
+        $websiteMenu = $this->config->getWebsiteMenu();
+        $websiteTheme = $this->config->getActiveTheme();
+        $data = compact('websiteName', 'websiteTitle', 'websiteMenu', 'websiteTheme');
+        return $data;
+    }
+
+    public function welcome()
+    {
+        return view($this->config->getActiveTheme() . '.welcome', $this->getCompactData());
     }
 
     /**
@@ -21,9 +32,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $websiteName = $this->websiteName;
-        $websiteTitle = $this->websiteTitle;
-        return view($this->config->getActiveTheme() . '.index', compact('websiteName', 'websiteTitle'));
+        return view($this->config->getActiveTheme() . '.index', $this->getCompactData());
     }
 
     /**
@@ -31,9 +40,7 @@ class FrontController extends Controller
      */
     public function create()
     {
-        $websiteName = $this->websiteName;
-        $websiteTitle = $this->websiteTitle;
-        return view($this->config->getActiveTheme() . '.create', compact('websiteName', 'websiteTitle'));
+        return view($this->config->getActiveTheme() . '.create', $this->getCompactData());
     }
 
     /**
@@ -41,8 +48,15 @@ class FrontController extends Controller
      */
     public function edit()
     {
-        $websiteName = $this->websiteName;
-        $websiteTitle = $this->websiteTitle;
-        return view($this->config->getActiveTheme() . '.edit', compact('websiteName', 'websiteTitle'));
+        return view($this->config->getActiveTheme() . '.edit', $this->getCompactData());
     }
+
+    public function show(int $id)
+    {
+        $data = $this->getCompactData();
+        $data['id'] = $id;
+        return view($this->config->getActiveTheme() . '.show', $data);
+    }
+
+
 }

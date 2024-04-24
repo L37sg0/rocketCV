@@ -6,8 +6,8 @@
     <div class="d-flex flex-column">
 
         <div class="profile">
-            <img src="assets/img/logo.jpeg" alt="" class="img-fluid rounded-circle">
-            <h1 class="text-light"><a href="index.blade.php">{{ $websiteName }}</a></h1>
+            <img src="/assets/img/logo.jpeg" alt="" class="img-fluid rounded-circle">
+            <h1 class="text-light"><a href="/">{{ $websiteName }}</a></h1>
             <div class="social-links mt-3 text-center">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -19,6 +19,12 @@
 
         <nav id="navbar" class="nav-menu navbar">
             <ul>
+                @foreach($websiteMenu as $name => $path)
+
+                    <li><a href="{{ $path }}" class="nav-link scrollto active"><i class="bx bx-home"></i>
+                            <span>{{ $name }}</span></a>
+                    </li>
+                @endforeach
                 <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
                 </li>
                 <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
