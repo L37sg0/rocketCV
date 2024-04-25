@@ -9,7 +9,7 @@ class UpdateApplicantRequest extends AbstractApplicantRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
 

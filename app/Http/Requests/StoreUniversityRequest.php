@@ -9,7 +9,7 @@ class StoreUniversityRequest extends AbstractUniversityRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
