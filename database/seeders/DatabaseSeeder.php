@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Applicant;
+use App\Models\Education;
+use App\Models\Skill;
+use App\Models\University;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Applicant::factory(100)->create();
+        University::factory(100)->create();
+        Skill::factory(100)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        foreach (Applicant::all() as $applicant) {
+            $minUnvId = University::first()->getAttribute(University::FIELD_ID);
+            $maxUnvId = University::orderBy(University::FIELD_ID, 'DESC')->first()->getAttribute(University::FIELD_ID);
+            Education::factory(rand(1,3))->create([
+                Education::FIELD_APPLICANT_ID => $applicant->getAttribute(Applicant::FIELD_ID),
+                Education::FIELD_UNV_ID => rand($minUnvId, $maxUnvId)
+            ]);
+
+
+            $minSkillId = Skill::first()->getAttribute(Skill::FIELD_ID);
+            $maxSkillId = Skill::orderBy(Skill::FIELD_ID, 'DESC')->first()->getAttribute(Skill::FIELD_ID);
+            for ($i = 0; $i < 5; $i++) {
+                $applicant->skills()->attach(rand($minSkillId, $maxSkillId));
+            }
+        }
+
     }
 }
