@@ -42,6 +42,10 @@
 <body>
 @include('iPortfolio.components.header')
 <main id="main">
+    <div class="alert alert-success success-message" role="alert" style="display: none;">
+    </div>
+    <div class="alert alert-danger error-message" role="alert" style="display: none;">
+    </div>
     @yield('content')
 </main><!-- End #main -->
 
@@ -58,7 +62,7 @@
 <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="/assets/vendor/typed.js/typed.umd.js"></script>
 <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
-<script src="/assets/vendor/php-email-form/validate.js"></script>
+{{--<script src="/assets/vendor/php-email-form/validate.js"></script>--}}
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
@@ -71,7 +75,30 @@
     });
 </script>
 @yield('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get success message from session storage
+        var successMessage = sessionStorage.getItem('successMessage');
+        var errorMessage = sessionStorage.getItem('errorMessage');
+        if (successMessage) {
+            // Display the success message
+            $('.success-message').text(successMessage).fadeIn();
+            // Clear the success message from session storage
+            sessionStorage.removeItem('successMessage');
+            // Fade out after 5 seconds
+            $('.success-message').delay(5000).fadeOut();
+        }
+        if (errorMessage) {
+            // Display the success message
+            $('.error-message').text(errorMessage).fadeIn();
+            // Clear the success message from session storage
+            sessionStorage.removeItem('successMessage');
+            // Fade out after 5 seconds
+            $('.error-message').delay(5000).fadeOut();
+        }
+    });
 
+</script>
 </body>
 
 </html>
