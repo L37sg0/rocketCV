@@ -9,7 +9,7 @@ class UpdateEducationRequest extends AbstractEducationRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

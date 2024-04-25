@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\ApplicantController;
-use App\Http\Controllers\Api\EducationController;
-use App\Http\Controllers\Api\SkillController;
-use App\Http\Controllers\Api\UniversityController;
+use App\Helper\Config;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [FrontController::class, 'welcome'])->name('welcome');
+Route::resource('cvs', FrontController::class);

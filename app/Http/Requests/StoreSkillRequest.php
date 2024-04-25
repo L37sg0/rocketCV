@@ -9,7 +9,7 @@ class StoreSkillRequest extends AbstractSkillRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

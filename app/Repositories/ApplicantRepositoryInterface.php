@@ -9,6 +9,8 @@ interface ApplicantRepositoryInterface
 {
     public function getAll(): Collection;
 
+    public function getAllPaginated(int $limit);
+
     public function getById(int $id): ?ApplicantInterface;
 
     public function create(array $data): ?ApplicantInterface;

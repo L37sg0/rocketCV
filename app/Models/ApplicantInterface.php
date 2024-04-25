@@ -38,5 +38,10 @@ interface ApplicantInterface
     public function getEducations(): Collection;
     public function addEducation(EducationInterface $education): static;
 
+    /**
+     * @param $relations
+     * @return mixed
+     */
+    public function load($relations);
 
 }
