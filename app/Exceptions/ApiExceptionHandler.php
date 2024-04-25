@@ -4,10 +4,13 @@ namespace App\Exceptions;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 use TypeError;
@@ -27,7 +30,25 @@ class ApiExceptionHandler extends Handler
                 return response()->json(["data" => ["message" => 'Resource not found']], 404);
             }
             if ($e instanceof AuthorizationException) {
-                return response()->json(["data" => ["message" => 'Unauthorized']], 401);
+                $logID = Str::ulid();
+                Log::error("$logID: " . get_class($e) . "-" . $e->getMessage() . "in" . $e->getFile() . ", line: " . $e->getLine() . ",trace: " . $e->getTraceAsString());
+                return response()->json(["data" => ["message" => 'Unauthorized', "log_id" => $logID]], 403);
+            }
+            if ($e instanceof AuthenticationException) {
+                $logID = Str::ulid();
+                Log::error("$logID: " . get_class($e) . "-" . $e->getMessage() . "in" . $e->getFile() . ", line: " . $e->getLine() . ",trace: " . $e->getTraceAsString());
+                return response()->json(["data" => ["message" => 'Unauthenticated', "log_id" => $logID]], 401);
+            }
+            if ($e instanceof ValidationException) {
+                $errors = $e->validator->errors();
+                $logID = Str::ulid();
+                Log::error("$logID: " . get_class($e) . "-" . $e->getMessage() . "in" . $e->getFile() . ", line: " . $e->getLine() . ",trace: " . $e->getTraceAsString());
+                return response()->json(["data" => ["message" => 'Bad Request, Invalid input', 'errors' => $errors]], 400);
+            }
+            if ($e instanceof TokenMismatchException) {
+                $logID = Str::ulid();
+                Log::error("$logID: " . get_class($e) . "-" . $e->getMessage() . "in" . $e->getFile() . ", line: " . $e->getLine() . ",trace: " . $e->getTraceAsString());
+                return response()->json(["data" => ["message" => 'Bad Request, ' . $e->getMessage()]], 400);
             }
             if ($e instanceof TypeError) {
                 $logID = Str::ulid();
